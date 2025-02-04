@@ -37,9 +37,10 @@ public class CitaService {
         for (File file : files) {
             try {
                 Cita cita = objectMapper.readValue(file, Cita.class);
-                if (cita.getFecha().equals(fecha)) {
+                if (cita.getFecha().equals(fecha.toString())) {
                     citas.add(cita);
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
