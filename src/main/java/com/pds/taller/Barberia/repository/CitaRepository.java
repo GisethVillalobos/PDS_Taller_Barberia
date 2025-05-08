@@ -1,6 +1,5 @@
 package com.pds.taller.Barberia.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +9,5 @@ import com.pds.taller.Barberia.model.Cita;
 
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Long> {
-    List<Cita> findByFecha(LocalDate fecha);
+    List<Cita> findByFecha(String fecha);
 }

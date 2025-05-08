@@ -24,7 +24,7 @@ public class CitaController {
     private CitaService citaService;
 
     @GetMapping("/buscar/{fecha}")
-    public List<Cita> getCitas(@PathVariable LocalDate fecha) {
+    public List<Cita> getCitas(@PathVariable String fecha) {
         return citaService.getCitasByFecha(fecha);
     }
 

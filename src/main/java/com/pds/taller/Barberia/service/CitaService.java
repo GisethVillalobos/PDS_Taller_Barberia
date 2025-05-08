@@ -7,13 +7,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pds.taller.Barberia.model.Cita;
+import com.pds.taller.Barberia.repository.CitaRepository;
 
 @Service
 public class CitaService {
+
+    @Autowired
+    private CitaRepository citaRepository;
 
     private final ObjectMapper objectMapper;
 
@@ -21,8 +26,8 @@ public class CitaService {
         this.objectMapper = new ObjectMapper();
     }
 
-    public List<Cita> getCitasByFecha(LocalDate fecha) {
-        String dirName = "citas/" + fecha.toString();
+    public List<Cita> getCitasByFecha(String fecha) {
+        String dirName = "citas/" + fecha;
         File dir = new File(dirName);
     
         if (!dir.exists() || !dir.isDirectory()) {
@@ -54,7 +59,7 @@ public class CitaService {
         cita.setFecha(cita.getFecha().toString());
         cita.setHora(cita.getHora().toString());
 
-        String dirName = "citas/" + cita.getFecha().toString();
+        String dirName = "citas/" + cita.getFecha();
         File dir = new File(dirName);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -69,6 +74,6 @@ public class CitaService {
             e.printStackTrace();
         }
 
-        return cita;
+        return citaRepository.save(cita);
     }
 }
